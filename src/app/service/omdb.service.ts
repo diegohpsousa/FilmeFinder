@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OmdbService {
-  private apikey = "6db75c90"; //converter em variavel de ambiente. 
-  private url = `http://www.omdbapei.com/?apikey=${this.apikey}}`
+  private apikey = "7bffa79f"; //converter em variavel de ambiente. 
+  private url = `http://www.omdbapi.com/?apikey=${this.apikey}`
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   searchMovie(title: string): Observable<any> {
-    return this.http.get(`${this.url}&t=${title}`);
+    return this.http.get(`${this.url}&s=${title}`);
   }
 }

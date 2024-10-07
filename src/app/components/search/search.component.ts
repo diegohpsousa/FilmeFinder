@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { OmdbService } from '../../service/omdb.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
