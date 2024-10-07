@@ -1,0 +1,14 @@
+<div class="container">
+    <h2>NTT Flix</h2>
+    <input #movieTitle type="text" class="form-control" placeholder="Título do Filme">
+    <button class="btn btn-primary mt-2" (click)="searchMovie(movieTitle.value)">
+      Buscar
+    </button>
+  
+    <div *ngIf="movie">
+      <h3>{{ movie.Title }}</h3>
+      <p>{{ movie.Plot }}</p>
+      <img [src]="movie.Poster" alt="Poster do Filme" />
+    </div>
+  </div>
+  
