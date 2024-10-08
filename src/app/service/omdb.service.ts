@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class OmdbService {
   private apikey = "7bffa79f"; //converter em variavel de ambiente. 
-  private url = `http://www.omdbapi.com/?apikey=${this.apikey}`
+  private url = `https://www.omdbapi.com/?apikey=${this.apikey}`
 
   constructor(private http:HttpClient) { }
 
