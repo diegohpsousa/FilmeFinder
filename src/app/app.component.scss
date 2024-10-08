@@ -17,14 +17,16 @@ body {
   flex-direction: column;
   min-height: 100vh;  
   background:
-  url('/assets/background-mobile.jpg') center no-repeat fixed
-
+  url('/assets/background-mobile.jpg') center no-repeat fixed;
+  background-size: cover;
+  
   
 }
 @media screen and (min-width: 575px ) {
     .wrapper{
         background:
-        url('/assets/background.jpg') center no-repeat fixed
+        url('/assets/background.jpg') no-repeat center fixed ;
+        background-size: cover;
     }
 }
 
