@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: calibri;
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  
+  background:
+  url('/assets/background-mobile.jpg') center no-repeat fixed
+
+  
+}
+@media screen and (min-width: 575px ) {
+    .wrapper{
+        background:
+        url('/assets/background.jpg') center no-repeat fixed
+    }
+}
+
+.main-content {
+//   margin-top: -25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background:
+   rgba($color: white, $alpha: 0.5)
+    center
+    fixed
+    no-repeat;
+}
+
+.header{
+    background: rgba($color: white, $alpha: 0.5);  
+}
+.footer {
+  width: 100%;
+  background: rgba($color: white, $alpha: 0.5);
+}

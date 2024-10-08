@@ -1,14 +1,105 @@
-<div class="container">
-    <h2>NTT Flix</h2>
-    <input #movieTitle type="text" class="form-control" placeholder="Título do Filme">
-    <button class="btn btn-primary mt-2" (click)="searchMovie(movieTitle.value)">
-      Buscar
-    </button>
-  
-    <div *ngIf="movie">
-      <h3>{{ movie.Title }}</h3>
-      <p>{{ movie.Plot }}</p>
-      <img [src]="movie.Poster" alt="Poster do Filme" />
-    </div>
+<div class="container search-container">
+  <img *ngIf="!isSearch" class="logo" src="assets/filmeFinderLogo.png" alt="" />
+  <div *ngIf="!isSearch">
+    <p class="home-text">{{ homeText }}</p>
   </div>
-  
+  <div class="form-group search-bar-container">
+    <input
+      [(ngModel)]="search"
+      type="text"
+      class="form-control search-bar"
+      placeholder="Nome do filme..."
+    />
+    <button class="btn btn-primary mt-2 search-button" (click)="searchMovie()">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+
+  <div *ngIf="movies.length > 0" class="movie-list mt-4">
+    <div class="row">
+      <div class="col-md-3 col-sm-4" *ngFor="let movie of movies">
+        <div
+          class="card mb-3"
+          (click)="toMoviePage(movie.imdbID)"
+          style="cursor: pointer"
+        >
+          <img
+            [src]="movie.Poster"
+            class="card-img-top"
+            *ngIf="movie.Poster !== 'N/A'"
+            alt="Movie Poster"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.Title }}</h5>
+            <p class="card-text">Year: {{ movie.Year }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav *ngIf="isSearch && totalPagesNumber > 1" aria-label="Pagination">
+      <ul class="pagination justify-content-center">
+
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button
+            class="page-link"
+            (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
+        </li>
+
+        <li *ngIf="getVisiblePages()[0] > 1" class="page-item">
+          <button class="page-link" (click)="changePage(1)">1</button>
+        </li>
+        <li *ngIf="getVisiblePages()[0] > 2" class="page-item disabled">
+          <span class="page-link">...</span>
+        </li>
+
+        <li
+          *ngFor="let page of getVisiblePages()"
+          class="page-item"
+          [class.active]="currentPage === page"
+        >
+          <button class="page-link" (click)="changePage(page)">
+            {{ page }}
+          </button>
+        </li>
+
+        <li
+          *ngIf="
+            getVisiblePages()[getVisiblePages().length - 1] <
+            totalPagesNumber - 1
+          "
+          class="page-item disabled"
+        >
+          <span class="page-link">...</span>
+        </li>
+        <li
+          *ngIf="
+            getVisiblePages()[getVisiblePages().length - 1] < totalPagesNumber
+          "
+          class="page-item"
+        >
+          <button class="page-link" (click)="changePage(totalPagesNumber)">
+            {{ totalPagesNumber }}
+          </button>
+        </li>
+
+        <li
+          class="page-item"
+          [class.disabled]="currentPage === totalPagesNumber"
+        >
+          <button
+            class="page-link"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage === totalPagesNumber"
+          >
+            Próximo
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

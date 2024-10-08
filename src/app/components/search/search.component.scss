@@ -1,0 +1,33 @@
+.search-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo{
+    width: 80%;
+    margin-bottom: 20px;
+    margin-top: -20ox;
+}
+.home-text{
+    text-align: center;
+    font-size: large;
+    max-width: 400px;
+    font-weight: bold;
+    font-style: italic;
+}
+.search-bar-container{
+    display: flex;
+    width: 100%;
+}
+.search-bar{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.search-button{
+    margin: 0 !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.movie-list{
+    max-width: 90vw;
+}

@@ -1,0 +1,158 @@
+<i class="bi bi-arrow-left" (click)="goBack()" style="cursor: pointer;">Voltar</i>
+<div class="container movie-details py-4">
+  <h1 class="mb-3 text-center">{{ movie.Title || "" }}</h1>
+
+  <div *ngIf="movie.Poster != 'N/A'" class="text-center mb-4">
+    <img
+      [src]="movie.Poster"
+      alt="Poster do filme {{ movie.Title }}"
+      class="img-fluid"
+      style="max-height: 400px"
+    />
+  </div>
+
+  <div class="row mb-4">
+    <div *ngIf="movie.Plot != 'N/A'" class="col-md-6">
+      <h4><strong>Sinopse:</strong></h4>
+      <p>{{ movie.Plot }}</p>
+    </div>
+    <div class="col-md-6">
+      <h4><strong>Detalhes:</strong></h4>
+      <p *ngIf="movie.Genre != 'N/A'"><strong>Gênero:</strong> {{ movie.Genre }}</p>
+      <p *ngIf="movie.Released != 'N/A'"><strong>Data de lançamento:</strong> {{ movie.Released }}</p>
+      <p *ngIf="movie.Runtime != 'N/A'"><strong>Duração:</strong> {{ movie.Runtime }}</p>
+      <p *ngIf="movie.Rated != 'N/A'">
+        <img
+          [src]="getClassificationIcon(movie.Rated)"
+          alt="{{ movie.Rated }} Icon"
+          style="width: 110px"
+        />
+      </p>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <h4 *ngIf="movie.Director != 'N/A'"><strong>Diretores:</strong></h4>
+    <ul *ngIf="movie.Director != 'N/A'" class="list-unstyled">
+      <li *ngFor="let director of movie.Director.split(', ')">
+        <a
+          [href]="'https://en.wikipedia.org/wiki/' + director"
+          target="_blank"
+          >{{ director }}</a
+        >
+      </li>
+    </ul>
+
+    <h4 *ngIf="movie.Actors  != 'N/A'"><strong>Atores:</strong></h4>
+    <ul *ngIf="movie.Actors != 'N/A'" class="list-unstyled">
+      <li *ngFor="let actor of movie.Actors.split(', ')">
+        <a [href]="'https://en.wikipedia.org/wiki/' + actor" target="_blank">{{
+          actor
+        }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="movie.Ratings != 'N/A'" class="ratings-section mb-4">
+    <h4><strong>Avaliações:</strong></h4>
+    <div class="rating-content d-flex justify-content-start flex-wrap">
+      <div class="rating-item" *ngFor="let rating of movie.Ratings">
+        <div class="d-flex align-items-center">
+          <img
+            [src]="getRatingIcon(rating.Source)"
+            [alt]="rating.Source"
+            class="mr-2"
+            style="width: 40px"
+          />
+          <span>{{ rating.Value }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="where-watch">
+    <a [href]="'https://www.justwatch.com/br/busca?q=' + movie.Title">
+      <button class="btn btn-success">Descubra onde assistir!</button>
+    </a>
+  </div>
+</div>
+
+<div class="movie-details-full container">
+  <div class="details-column md-5">
+    <h1 class="mb-3 text-lg-start">{{ movie.Title || "" }}</h1>
+    <div class="row">
+      <div *ngIf="movie.Plot != 'N/A'" class="col sinopse">
+        <h4><strong>Sinopse:</strong></h4>
+        <p>{{ movie.Plot }}</p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <h4 *ngIf="movie.Director != 'N/A'"><strong>Diretores:</strong></h4>
+      <ul *ngIf="movie.Director != 'N/A'" class="list-unstyled">
+        <li *ngFor="let director of movie.Director.split(', ')">
+          <a
+            [href]="'https://en.wikipedia.org/wiki/' + director"
+            target="_blank"
+            >{{ director }}</a
+          >
+        </li>
+      </ul>
+
+      <h4 *ngIf="movie.Actors != 'N/A'"><strong>Atores:</strong></h4>
+      <ul *ngIf="movie.Actors != 'N/A'" class="list-unstyled">
+        <li *ngFor="let actor of movie.Actors.split(', ')">
+          <a
+            [href]="'https://en.wikipedia.org/wiki/' + actor"
+            target="_blank"
+            >{{ actor }}</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="movie.Ratings != 'N/A'" class="ratings-section mb-4">
+        <h4><strong>Avaliações:</strong></h4>
+        <div class="rating-content d-flex justify-content-start flex-wrap">
+          <div class="rating-item d-flex justify-content-start" *ngFor="let rating of movie.Ratings">
+            <div class="rating">
+              <img
+                [src]="getRatingIcon(rating.Source)"
+                [alt]="rating.Source"
+                class="mr-2"
+                style="width: 40px"
+              />
+              <span>{{ rating.Value }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="where-watch">
+        <a [href]="'https://www.justwatch.com/br/busca?q=' + movie.Title">
+          <button class="btn btn-success">Descubra onde assistir!</button>
+        </a>
+      </div>
+  </div>
+  <div class="details-column md-5">
+    <div class="row">
+      <div *ngIf="movie.Poster != 'N/A'" class="mb-4">
+        <img
+          [src]="movie.Poster"
+          alt="Poster do filme {{ movie.Title }}"
+          class="img-fluid poster"
+          style="max-height: 400px"
+        />
+      </div>
+      <div class="col">
+        <p *ngIf="movie.Rated != 'N/A'">
+          <img
+            [src]="getClassificationIcon(movie.Rated)"
+            alt="{{ movie.Rated }} Icon"
+            style="width: 110px"
+          />
+        </p>
+        <p *ngIf="movie.Genre != 'N/A'"><strong>Gênero:</strong> {{ movie.Genre }}</p>
+        <p *ngIf="movie.Released != 'N/A'"><strong>Data de lançamento:</strong> {{ movie.Released }}</p>
+        <p *ngIf="movie.Runtime != 'N/A'"><strong>Duração:</strong> {{ movie.Runtime }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,11 @@ export class OmdbService {
 
   constructor(private http:HttpClient) { }
 
-  searchMovie(title: string): Observable<any> {
-    return this.http.get(`${this.url}&s=${title}`);
+  searchMovie(title: string, page: number = 1): Observable<any> {
+    return this.http.get(`${this.url}&s=${title}&type=movie&page=${page}`);
+  }
+
+  getMovieById(id: string): Observable<any>{
+    return this.http.get(`${this.url}&i=${id}`)
   }
 }
